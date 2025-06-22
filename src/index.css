@@ -1,13 +1,206 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400 dark:bg-gray-500;
+}
+
+/* Smooth transitions */
+* {
+    transition-property:
+        color, background-color, border-color, text-decoration-color, fill,
+        stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+/* Prose styling for markdown */
+.prose {
+    @apply text-gray-900 dark:text-gray-100;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+    @apply text-gray-900 dark:text-gray-100;
+}
+
+.prose code {
+    @apply bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-1 py-0.5 rounded;
+}
+
+.prose pre {
+    @apply bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100;
+}
+
+.prose blockquote {
+    @apply border-l-gray-300 dark:border-l-gray-600 text-gray-700 dark:text-gray-300;
+}
+
+.prose a {
+    @apply text-blue-600 dark:text-blue-400;
+}
+
+.prose strong {
+    @apply text-gray-900 dark:text-gray-100;
+}
+
+/* Streaming animations */
+@keyframes typing-dot {
+    0%,
+    20% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.7;
+    }
+    80%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.typing-indicator {
+    animation: typing-dot 1.4s infinite ease-in-out;
+}
+
+.typing-indicator:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+/* Cursor blink animation */
+@keyframes cursor-blink {
+    0%,
+    50% {
+        opacity: 1;
+    }
+    51%,
+    100% {
+        opacity: 0;
+    }
+}
+
+.cursor-blink {
+    animation: cursor-blink 1s infinite;
+}
+
+/* Streaming text fade-in */
+@keyframes stream-in {
+    from {
+        opacity: 0;
+        transform: translateY(2px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stream-text {
+    animation: stream-in 0.2s ease-out;
+}
+
+/* Loading screen animations */
+@keyframes logo-pulse {
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+}
+
+.logo-pulse {
+    animation: logo-pulse 2s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.gradient-animate {
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease infinite;
+}
+
+/* Streaming cursor positioning */
+.streaming-cursor {
+    display: inline-block;
+    vertical-align: text-top;
+    margin-left: 1px;
+}
+
+/* Smooth scrolling for chat */
+.chat-scroll {
+    scroll-behavior: smooth;
+}
+
+/* Better markdown rendering for streaming */
+.prose p:last-child {
+    margin-bottom: 0;
+}
+
+.prose > *:last-child {
+    margin-bottom: 0;
+}
+
+/* Streaming cursor positioning */
+.streaming-cursor {
+    display: inline-block;
+    vertical-align: baseline;
+    margin-left: 2px;
+}
+
+.prose-content {
+    position: relative;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+        "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family:
+        source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
