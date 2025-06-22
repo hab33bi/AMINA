@@ -32,6 +32,11 @@ function App() {
 
   const chatWindowRef = useRef<HTMLDivElement>(null);
 
+  // API Configuration
+  const API_BASE_URL =
+    process.env.REACT_APP_LM_STUDIO_URL || "http://192.168.1.174:1234/v1";
+  const MODEL_NAME = process.env.REACT_APP_MODEL_NAME || "gemma-3-12b";
+
   const scrollToBottom = () => {
     if (chatWindowRef.current) {
       chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
@@ -233,22 +238,19 @@ function App() {
         streamingPlaceholder,
       ]);
 
-      const response = await fetch(
-        "http://192.168.1.174:1234/v1/chat/completions",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            model: "gemma-3-12b",
-            messages: messagesForApi,
-            temperature: 0.7,
-            max_tokens: 2000,
-            stream: true,
-          }),
+      const response = await fetch(`${API_BASE_URL}/chat/completions`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({
+          model: MODEL_NAME,
+          messages: messagesForApi,
+          temperature: 0.7,
+          max_tokens: 2000,
+          stream: true,
+        }),
+      });
 
       if (!response.ok) {
         const errorData = await response
@@ -316,7 +318,7 @@ function App() {
       setIsStreaming(false);
 
       const errorMessage: Message = {
-        text: `Error: ${error instanceof Error ? error.message : String(error)}. Please ensure LM Studio is running with Gemma 3 12b model loaded at http://192.168.1.174:1234/v1/chat/completions.`,
+        text: `Error: ${error instanceof Error ? error.message : String(error)}. Please ensure LM Studio is running with ${MODEL_NAME} model loaded at ${API_BASE_URL}/chat/completions.`,
         sender: "llm",
       };
 
@@ -725,9 +727,9 @@ function App() {
                     What can I help you build?
                   </h2>
                   <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                    I'm AMINA, powered by Gemma 3 12b via LM Studio. I can help
-                    you with coding, answer questions, analyze images, and much
-                    more. Start a conversation below!
+                    I'm AMINA. I can help you answer questions that trouble your
+                    worried mind, analyze images, write contracts and much more.
+                    Start a conversation below!
                   </p>
                 </div>
 
